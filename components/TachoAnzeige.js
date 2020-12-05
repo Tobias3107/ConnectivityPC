@@ -5,7 +5,7 @@ import Canvas from 'react-native-canvas'
 export default class TachoAnzeigeCanvas extends Component {
     
     lineWidth = 10;
-
+    
     styles = StyleSheet.create({
         card: {
             backgroundColor: "#eaeaea",
@@ -36,7 +36,6 @@ export default class TachoAnzeigeCanvas extends Component {
         canvas.width = size.x;
         canvas.height = size.y;
         const context = canvas.getContext('2d');
-
         // Background Line
         context.beginPath();
         context.strokeStyle = "#676767";
@@ -50,22 +49,26 @@ export default class TachoAnzeigeCanvas extends Component {
         //      CenterX, CenterY,Scale Start, End
         context.strokeStyle = "#00ffff";
         context.lineWidth = this.lineWidth;
-        context.arc((size.x /2), ((size.y-10)+this.lineWidth), size.r,1*Math.PI,(1 + this.props.usage )*Math.PI);
+        context.arc((size.x /2), ((size.y-10)+this.lineWidth), size.r,1*Math.PI,(1 + (this.props.usage/100) )*Math.PI);
         context.stroke();
         context.restore();
 
         // USAGE TEXT 
 
         context.font = "20px Arial";
-        var txt = (this.props.usage*100) + "%";
+        var txt = (this.props.usage) + "%";
         context.fillText(txt, (size.x /2)-20, ((size.y-10)+this.lineWidth));
+        this._canvas = canvas;
+    }
 
+    componentDidUpdate() {
+        this.handleCanvas(this._canvas);
     }
 
     render() {
         return (
             <View style={this.styles.card}>
-                <Canvas ref={this.handleCanvas} />
+                <Canvas ref={this.handleCanvas} usage={this.props.usage} />
                 <View style={this.styles.line}>
                     <Text style={{ textAlign:"center", width: "50%" }} >Temp</Text>
                     <Text style={{ textAlign:"center", width: "50%" }}>{this.props.temp}°C</Text>
