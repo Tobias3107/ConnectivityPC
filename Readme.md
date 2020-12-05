@@ -9,7 +9,8 @@ That is the Backend Server. The Server will run on ur PC.
 The App is work in Progess. it will be upload on Play Store.
 
 ## TODO
+- [] Add Error Handling
 - [] Add Config for Server IP
 - [] Add Storage information
 - [] Add memory information
-- [] Add Display for CPU-Cores
+- [X] Add Display for CPU-Cores

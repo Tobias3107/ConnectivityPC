@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native'
 import TachoAnzeige from './TachoAnzeige'
 import axios from 'react-native-axios'
 
@@ -25,21 +25,25 @@ export default class TachoCollection extends Component {
     }
     constructor(props) {
         super(props)
-        setInterval(() => {
-            axios.get('http://192.168.2.3:3000/api/cpuData')
-            .then(res => {
-                data = res.data;
-                console.log(data);
-                arr = [];
-                data.temp.cores.map?.((tempa, index) => {
-                    arr.push({
-                        cpuid: index,
-                        usage: data.usage,
-                        temp: tempa
+        this.tachoInterval = setInterval(() => {
+                axios.get('http://192.168.2.3:3000/api/cpuData')
+                .then(res => {
+                    data = res.data;
+                    console.log(data);
+                    arr = [];
+                    data.temp.cores.map?.((tempa, index) => {
+                        arr.push({
+                            cpuid: index,
+                            usage: data.usage,
+                            temp: tempa
+                        });
                     });
-                });
-                this.setState({ Tachos: arr, loaded: true });
-            })
+                    this.setState({ Tachos: arr, loaded: true });
+                }).catch(function(error) {
+                    Alert.alert(error);
+                    console.log(error);
+                    clearInterval(this.tachoInterval);
+                });    
         }, 3000);
     }
 
