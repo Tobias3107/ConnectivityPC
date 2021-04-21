@@ -16,3 +16,5 @@ The App is work in Progess. it will be upload on Play Store.
 - [X] Add Display for CPU-Cores
 
 - [ ] Good Designing comming at the End
+
+- [ ] Publish on Play Store
