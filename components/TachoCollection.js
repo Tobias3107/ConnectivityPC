@@ -12,7 +12,6 @@ export default class TachoCollection extends Component {
             justifyContent: "space-between",
             padding: 20,
             flexWrap: "wrap",
-            height: "100%"
         },
         Tacho: {
         }
@@ -26,10 +25,9 @@ export default class TachoCollection extends Component {
     constructor(props) {
         super(props)
         this.tachoInterval = setInterval(() => {
-                axios.get('http://192.168.2.3:3000/api/cpuData')
+                axios.get('http://172.30.1.35:3000/api/cpuData')
                 .then(res => {
                     data = res.data;
-                    console.log(data);
                     arr = [];
                     data.temp.cores.map?.((tempa, index) => {
                         arr.push({
@@ -53,7 +51,7 @@ export default class TachoCollection extends Component {
 
     render() {
         return (
-            <ScrollView style={{ height: "100%" }}>
+            <ScrollView style={{ height: "50%" }}>
                 <View style={this.styles.Collection}>
                     {
                         this.state.Tachos.map((Tacho, index) => 

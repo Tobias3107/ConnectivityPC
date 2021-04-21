@@ -12,5 +12,7 @@ The App is work in Progess. it will be upload on Play Store.
 - [] Add Error Handling
 - [] Add Config for Server IP
 - [] Add Storage information
-- [] Add memory information
+- [X] Add memory information
 - [X] Add Display for CPU-Cores
+
+- [] Good Designing comming at the End
