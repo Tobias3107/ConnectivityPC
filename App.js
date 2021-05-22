@@ -49,20 +49,20 @@ export default class App extends Component {
   }
 
   buttonPress = () => {
-    this.props.navigation.navigate('Settings', {changeIpState: this.changeIpState});
+    this.props.navigation.navigate('Settings', {setState:state => this.setState(state), state: this.state});
   }
 
   render() {
     return (
       <>
         <View style={this.styles.container}>
-          <TachoCollection style={this.styles.TachoColl}/>
-          <MemCollection style={this.styles.MemColl}/>
+          <TachoCollection style={this.styles.TachoColl} pcIp={this.state.pcIp}/>
+          <MemCollection style={this.styles.MemColl} pcIp={this.state.pcIp}/>
         </View>
-        <View style={this.styles.SettingButton} props={this.state}>
+        <View style={this.styles.SettingButton}>
             <Button
               onPress={this.buttonPress}
-              title="Click ME"
+              title="Options"
               color="blue"
               />
           </View>

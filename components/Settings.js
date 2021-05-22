@@ -1,13 +1,11 @@
+
+
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, TextInput } from 'react-native'
 
 export default class Settings extends Component {
-    state = {
-        ipValue: "172.30.1.35:3000"
-    }
-
-    onChangeText(text) {
-        this.props.changeIpState(text);
+    constructor() {
+        super();
     }
     render() {
         return (
@@ -16,8 +14,8 @@ export default class Settings extends Component {
                     <Text style={this.style.Text}>PC-IP</Text>
                     <TextInput
                     style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-                    onChangeText={text => onChangeText(text)}
-                    value={this.state.ipValue}
+                    onChangeText={text => this.props.route.params.setState({pcIp: text})}
+                    defaultValue={this.props.route.params.state.pcIp}
                     />
                 </View>
             </View>
@@ -41,3 +39,4 @@ export default class Settings extends Component {
         }
     });
 }
+

@@ -20,7 +20,7 @@ export default class MemCollection extends PureComponent {
 
     handleCanvas = (canvas) => {
         canvas.width = Dimensions.get('screen').width;
-        canvas.height = 70;
+        canvas.height = 30;
         const context = canvas.getContext('2d');
         context.beginPath();
 
@@ -29,8 +29,8 @@ export default class MemCollection extends PureComponent {
         context.strokeStyle = "#676767";
         context.lineWidth = 20;
         context.lineCap = "round";
-        context.moveTo(50, 50);
-        context.lineTo(Dimensions.get('screen').width-50, 50);
+        context.moveTo(50, 20);
+        context.lineTo(Dimensions.get('screen').width-50, 20);
         context.stroke();
         context.restore();
 
@@ -40,8 +40,8 @@ export default class MemCollection extends PureComponent {
         context.beginPath();
         context.strokeStyle = "#00ffff";
         context.lineWidth = 10;
-        context.moveTo(50, 50);
-        context.lineTo(percentOfUsageWidth+50, 50);
+        context.moveTo(50, 20);
+        context.lineTo(percentOfUsageWidth+50, 20);
         context.stroke();
         context.restore();
         this._canvas = canvas;
@@ -50,7 +50,7 @@ export default class MemCollection extends PureComponent {
     constructor(props) {
         super(props)
         this.tachoInterval = setInterval(() => {
-                axios.get('http://172.30.1.35:3000/api/ALL')
+                axios.get('http://'+ this.props.pcIp +'/api/ALL')
                 .then(res => {
                     data = res.data;
                     arr = [];
@@ -72,6 +72,7 @@ export default class MemCollection extends PureComponent {
     render() {
         return (
             <View>
+                <Text style={this.style.memPerce}>Memory Usage</Text>
                 <Canvas ref={this.handleCanvas}/>
                 <Text style={this.style.memPerce}>{this.state.memPercentence}%</Text>
             </View>

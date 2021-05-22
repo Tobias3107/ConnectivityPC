@@ -24,8 +24,9 @@ export default class TachoCollection extends Component {
     }
     constructor(props) {
         super(props)
+
         this.tachoInterval = setInterval(() => {
-                axios.get('http://172.30.1.35:3000/api/cpuData')
+                axios.get('http://'+ this.props.pcIp +'/api/cpuData')
                 .then(res => {
                     data = res.data;
                     arr = [];
@@ -38,7 +39,6 @@ export default class TachoCollection extends Component {
                     });
                     this.setState({ Tachos: arr, loaded: true });
                 }).catch(function(error) {
-                    Alert.alert(error);
                     console.log(error);
                     clearInterval(this.tachoInterval);
                 });    

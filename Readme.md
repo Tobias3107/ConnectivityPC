@@ -17,4 +17,11 @@ The App is work in Progess. it will be upload on Play Store.
 
 - [ ] Good Designing comming at the End
 
-- [ ] Publish on Play Store
+Android
+- [ ] Testing and Prepare for Publish on Play Store
+- [ ] Publish on Play Store (Android)
+
+Maybe :
+IOS
+- [ ] Testing and Prepare for Publish on App Store 
+- [ ] Publish on App Store (IOS)
