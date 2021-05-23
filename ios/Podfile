@@ -10,6 +10,8 @@ target 'connectiveTesting10' do
 
   pod 'react-native-webview', :path => '../node_modules/react-native-webview'
 
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-async-storage/async-storage'
+
   target 'connectiveTesting10Tests' do
     inherit! :complete
     # Pods for testing

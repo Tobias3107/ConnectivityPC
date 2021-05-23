@@ -20,6 +20,7 @@ import StorageCollection from './components/StorageCollection';
 import TachoAnzeige from './components/TachoAnzeige';
 import TachoCollection from './components/TachoCollection';
 import axios from 'react-native-axios'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class App extends Component {
 
@@ -58,6 +59,7 @@ export default class App extends Component {
   }
   componentDidMount() {
     Dimensions.addEventListener("change", this.onChangeDimension);
+    this.setupConfigData();
   }
 
   componentWillUnmount() {
@@ -67,6 +69,17 @@ export default class App extends Component {
 
   buttonPress = () => {
     this.props.navigation.navigate('Settings', {setState:state => this.setState(state), state: this.state});
+  }
+
+  setupConfigData = async () => {
+    try {
+      const pcIPValue = await AsyncStorage.getItem('pcIP')
+      if(pcIPValue !== null) {
+        this.setState({pcIp: pcIPValue})
+      }
+    } catch(e) {
+      // error reading value
+    }
   }
 
   render() {

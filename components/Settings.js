@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, TextInput } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class Settings extends Component {
     constructor() {
@@ -14,7 +15,10 @@ export default class Settings extends Component {
                     <Text style={this.style.Text}>PC-IP</Text>
                     <TextInput
                     style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-                    onChangeText={text => this.props.route.params.setState({pcIp: text})}
+                    onChangeText={text => {
+                        this.props.route.params.setState({pcIp: text}); 
+                        AsyncStorage.setItem('pcIP', text);
+                    }}
                     defaultValue={this.props.route.params.state.pcIp}
                     />
                 </View>
