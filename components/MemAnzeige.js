@@ -18,6 +18,7 @@ export default class MemCollection extends PureComponent {
     }
 
     handleCanvas = (canvas) => {
+        if(!canvas) return;
         var memUsage = this.props.apiAll.mem?.used;
         var memMax = this.props.apiAll.mem?.total;
         canvas.width = Dimensions.get('screen').width;

@@ -19,7 +19,7 @@ import MemAnzeige from './components/MemAnzeige';
 import StorageCollection from './components/StorageCollection';
 import TachoAnzeige from './components/TachoAnzeige';
 import TachoCollection from './components/TachoCollection';
-import axios from 'react-native-axios'
+import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class App extends Component {
@@ -29,23 +29,30 @@ export default class App extends Component {
     this.changeIpState = this.changeIpState.bind(this);
 
     this.AllInterval = setInterval(() => {
-            axios.get('http://'+ this.state.pcIp +'/api/ALL')
+      try {
+            rtnData = axios('http://'+ this.state.pcIp +'/api/ALL')
             .then(res => {
                 data = res.data;
-                this.setState({ apiAll: data, fsDisks: data.fsSize});
-            }).catch(function(error) {
-                console.log(error);
-                clearInterval(this.tachoInterval);
+                this.setState({ apiAll: data, fsDisks: data.fsSize, loadedData: true});
+                return true;
+            }).catch(error => {
+                console.log("No Connection");
+                this.setState({loadedData: false});
+                return;
             });
+      } catch (error) {
+
+      }
     }, 3000);
 }
 
   state = {
     window: Dimensions.get("window"),
     screen: Dimensions.get("screen"),
+    loadedData: false,
     apiAll: {},
     fsDisks: [],
-    pcIp: "192.168.2.117:3000"
+    pcIp: ""
   }
 
   changeIpState = (ip) => {
@@ -85,11 +92,16 @@ export default class App extends Component {
   render() {
     return (
       <>
+      {this.state.loadedData ? (
         <View style={this.styles.container}>
           <TachoCollection style={this.styles.TachoColl} pcIp={this.state.pcIp} state={this.state}/>
           <MemAnzeige style={this.styles.MemColl} pcIp={this.state.pcIp} apiAll={this.state.apiAll}/>
           <StorageCollection style={this.styles.StorColl} pcIp={this.state.pcIp} state={this.state}/>
         </View>
+      ) : 
+          (
+            <Text style={this.styles.noConText}>No Connection Found</Text>
+          )}
         <View style={this.styles.SettingButton}>
             <Button
               onPress={this.buttonPress}
@@ -116,38 +128,12 @@ export default class App extends Component {
       fontSize: 50,
       right:     10,
       bottom:      10,
+    },
+    noConText: {
+      textAlign: "center",
+      textAlignVertical: "center",
+      height: "100%"
     }
   });
 
 }
-/*
-const App = () => {
-  return (
-    <>
-        <View style={styles.container}>
-          <TachoCollection style={{width: '100%'}} />
-        </View>
-    </>
-  );
-};
-
-
-            <Button icon={
-              <Icon
-              name="fa-cog"
-              size={15}
-              color="white"
-            />
-            } title="Settings"  />
-import { 
-  Button
-} from 'react-native-element';
-import {
-  Icon
-} from 'react-native-vector-icons/FontAwesome';
-
-
-
-
-*/
-

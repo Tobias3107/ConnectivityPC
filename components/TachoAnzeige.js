@@ -28,6 +28,8 @@ export default class TachoAnzeigeCanvas extends Component {
     })
 
     handleCanvas = (canvas) => {
+        if(!canvas) return;
+
         size = {
             x: 160,
             y: 70,

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native'
 import TachoAnzeige from './TachoAnzeige'
-import axios from 'react-native-axios'
+import axios from 'axios'
 
 export default class TachoCollection extends Component {
 
@@ -49,8 +49,9 @@ export default class TachoCollection extends Component {
                     }
                     this.setState({ Tachos: arr, loaded: true });
                 }).catch(function(error) {
-                    console.log(error);
+                    this.setState({loadedData: false})
                     clearInterval(this.tachoInterval);
+                    throw error;
                 });    
         }, 3000);
     }

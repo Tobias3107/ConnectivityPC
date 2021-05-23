@@ -17,6 +17,7 @@ export default class StorageAnzeige extends Component {
     })
 
     handleCanvas = (canvas) => {
+        if(!canvas) return;
         canvas.width = Dimensions.get('screen').width;
         canvas.height = 30;
         const context = canvas.getContext('2d');
@@ -57,7 +58,7 @@ export default class StorageAnzeige extends Component {
                 <View style={{alignItems:"center"}}>
                     <View style={this.style.subtitle}>
                         <Text style={{width: "50%",textAlign: "left"}}>{Math.floor(this.props.fsDisk.use*100)/100}%</Text>
-                        <Text style={{ width: "50%",textAlign: "right"}}>{Math.floor(this.props.fsDisk.used * 0.00000009313226)*0.01}
+                        <Text style={{ width: "50%",textAlign: "right"}}>{Math.floor(this.props.fsDisk.used * 0.00000009313226)/100}
                         / {Math.floor(this.props.fsDisk.size * 0.00000009313226)*0.01} GiB</Text>
                     </View>
                 </View>
