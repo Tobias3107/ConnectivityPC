@@ -8,7 +8,7 @@ Included :
 
 
 That is the Backend Server. The Server will run on ur PC. 
-[tabletExpressServer](https://github.com/Tobias3107/tabletExpressServer)
+[ConnectivityPC-Server](https://github.com/Tobias3107/ConnectivityPC-Server)
 
 
 The App is work in Progess. it will be upload on Play Store.
@@ -21,7 +21,7 @@ The App is work in Progess. it will be upload on Play Store.
     - [ ] Display Data of RAM usage like ( 5/8Gb )
 - [X] Add Display for CPU-Cores
 
-- [ ] Change App Name to ConnectivityPC from connectiveTesting10
+- [X] Change App Name to ConnectivityPC from connectiveTesting10
 
 (- [ ] Good Designing comming at the End)
 
@@ -35,6 +35,8 @@ IOS
 - [ ] Publish on App Store (IOS)
 
 ## KNOWN ISSUES
+
+- Sometimes dont work rounded of Used GiB 
 
 ## LISTEN
 
