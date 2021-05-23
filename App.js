@@ -15,19 +15,35 @@ import {
   Dimensions,
   Button
 } from 'react-native';
-import MemCollection from './components/MemCollection';
+import MemAnzeige from './components/MemAnzeige';
+import StorageCollection from './components/StorageCollection';
 import TachoAnzeige from './components/TachoAnzeige';
 import TachoCollection from './components/TachoCollection';
+import axios from 'react-native-axios'
 
 export default class App extends Component {
 
   constructor(props) {
     super(props);
     this.changeIpState = this.changeIpState.bind(this);
-  }
+
+    this.AllInterval = setInterval(() => {
+            axios.get('http://'+ this.state.pcIp +'/api/ALL')
+            .then(res => {
+                data = res.data;
+                this.setState({ apiAll: data, fsDisks: data.fsSize});
+            }).catch(function(error) {
+                console.log(error);
+                clearInterval(this.tachoInterval);
+            });
+    }, 3000);
+}
+
   state = {
     window: Dimensions.get("window"),
     screen: Dimensions.get("screen"),
+    apiAll: {},
+    fsDisks: [],
     pcIp: "192.168.2.117:3000"
   }
 
@@ -46,6 +62,7 @@ export default class App extends Component {
 
   componentWillUnmount() {
     Dimensions.removeEventListener("change", this.onChangeDimension);
+    clearInterval();
   }
 
   buttonPress = () => {
@@ -56,8 +73,9 @@ export default class App extends Component {
     return (
       <>
         <View style={this.styles.container}>
-          <TachoCollection style={this.styles.TachoColl} pcIp={this.state.pcIp}/>
-          <MemCollection style={this.styles.MemColl} pcIp={this.state.pcIp}/>
+          <TachoCollection style={this.styles.TachoColl} pcIp={this.state.pcIp} state={this.state}/>
+          <MemAnzeige style={this.styles.MemColl} pcIp={this.state.pcIp} apiAll={this.state.apiAll}/>
+          <StorageCollection style={this.styles.StorColl} pcIp={this.state.pcIp} state={this.state}/>
         </View>
         <View style={this.styles.SettingButton}>
             <Button

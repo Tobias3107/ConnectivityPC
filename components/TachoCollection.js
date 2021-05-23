@@ -30,13 +30,23 @@ export default class TachoCollection extends Component {
                 .then(res => {
                     data = res.data;
                     arr = [];
-                    data.temp.cores.map?.((tempa, index) => {
-                        arr.push({
-                            cpuid: index,
-                            usage: data.usage,
-                            temp: tempa
+                    if(data.usage instanceof Array) {
+                        data.temp.cores.map?.((tempa, index) => {
+                            arr.push({
+                                cpuid: index,
+                                usage: data.usage[index],
+                                temp: tempa
+                            });
                         });
-                    });
+                    } else {
+                        data.temp.cores.map?.((tempa, index) => {
+                            arr.push({
+                                cpuid: index,
+                                usage: data.usage,
+                                temp: tempa
+                            });
+                        });
+                    }
                     this.setState({ Tachos: arr, loaded: true });
                 }).catch(function(error) {
                     console.log(error);

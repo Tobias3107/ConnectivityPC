@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react'
 import { Text, StyleSheet, View, Dimensions, Alert } from 'react-native'
 import Canvas from 'react-native-canvas'
-import axios from 'react-native-axios'
 
 export default class MemCollection extends PureComponent {
 
@@ -19,6 +18,8 @@ export default class MemCollection extends PureComponent {
     }
 
     handleCanvas = (canvas) => {
+        var memUsage = this.props.apiAll.mem?.used;
+        var memMax = this.props.apiAll.mem?.total;
         canvas.width = Dimensions.get('screen').width;
         canvas.height = 30;
         const context = canvas.getContext('2d');
@@ -34,7 +35,7 @@ export default class MemCollection extends PureComponent {
         context.stroke();
         context.restore();
 
-        percentOfUsage = this.state.memUsage / this.state.memMax
+        percentOfUsage = memUsage / memMax
         percentOfUsageWidth = (Dimensions.get('screen').width-100) * percentOfUsage;
         // Usage not working
         context.beginPath();
@@ -47,24 +48,6 @@ export default class MemCollection extends PureComponent {
         this._canvas = canvas;
     }
 
-    constructor(props) {
-        super(props)
-        this.tachoInterval = setInterval(() => {
-                axios.get('http://'+ this.props.pcIp +'/api/ALL')
-                .then(res => {
-                    data = res.data;
-                    arr = [];
-                    this.setState({ memUsage: data.mem.used, memMax: data.mem.total, loaded: true });
-                    
-                }).catch(function(error) {
-                    console.log(error);
-                    clearInterval(this.tachoInterval);
-                });    
-                this.setState({ memPercentence: Math.floor((this.state.memUsage / this.state.memMax)*10000) /100 });
-        }, 3000);
-
-    }
-
     componentDidUpdate() {
         this.handleCanvas(this._canvas);
     }
@@ -74,7 +57,7 @@ export default class MemCollection extends PureComponent {
             <View>
                 <Text style={this.style.memPerce}>Memory Usage</Text>
                 <Canvas ref={this.handleCanvas}/>
-                <Text style={this.style.memPerce}>{this.state.memPercentence}%</Text>
+                <Text style={this.style.memPerce}>{Math.floor((this.props.apiAll.mem?.used / this.props.apiAll.mem?.total)*10000) /100}%</Text>
             </View>
         )
     }
