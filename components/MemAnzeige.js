@@ -7,6 +7,13 @@ export default class MemCollection extends PureComponent {
     style = StyleSheet.create({
           memPerce: {
               textAlign: "center"
+          },
+          subtitle: {
+              width: "75%",
+              flex: 1,
+              flexDirection:"row",
+              alignItems: "center",
+              margin: 10
           }
     })
 
@@ -58,7 +65,13 @@ export default class MemCollection extends PureComponent {
             <View>
                 <Text style={this.style.memPerce}>Memory Usage</Text>
                 <Canvas ref={this.handleCanvas}/>
-                <Text style={this.style.memPerce}>{Math.floor((this.props.apiAll.mem?.used / this.props.apiAll.mem?.total)*10000) /100}%</Text>
+                <View style={{alignItems:"center"}}>
+                    <View style={this.style.subtitle}>
+                        <Text style={{width: "50%",textAlign: "left"}}>{Math.floor((this.props.apiAll.mem.used / this.props.apiAll.mem.total)*10000) /100}%</Text>
+                        <Text style={{ width: "50%",textAlign: "right"}}>{Math.floor(this.props.apiAll.mem.used * 0.00000009313226)/100}
+                        / {Math.floor(this.props.apiAll.mem.total * 0.00000009313226)*0.01} GiB</Text>
+                    </View>
+                </View>
             </View>
         )
     }

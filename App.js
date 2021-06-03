@@ -36,7 +36,6 @@ export default class App extends Component {
                 this.setState({ apiAll: data, fsDisks: data.fsSize, loadedData: true});
                 return true;
             }).catch(error => {
-                console.log("No Connection");
                 this.setState({loadedData: false});
                 return;
             });

@@ -57,7 +57,7 @@ export default class TachoCollection extends Component {
     }
 
     componentWillUnmount() {
-        clearInterval();
+        clearInterval(this.tachoInterval);
     }
 
     render() {

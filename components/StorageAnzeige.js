@@ -53,7 +53,7 @@ export default class StorageAnzeige extends Component {
     render() {
         return (
             <View>
-                <Text style={this.style.memPerce}>{this.props.fsDisk.fs} Usage</Text>
+                <Text style={this.style.memPerce}>{this.props.fsDisk?.fs} Usage</Text>
                 <Canvas ref={this.handleCanvas}/>
                 <View style={{alignItems:"center"}}>
                     <View style={this.style.subtitle}>
