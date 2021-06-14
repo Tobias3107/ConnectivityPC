@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, TextInput } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import VersionNumber from 'react-native-version-number';
 
 export default class Settings extends Component {
     constructor() {
@@ -14,7 +15,7 @@ export default class Settings extends Component {
         return (
             <View style={this.style.container} >
                 <View style={this.style.oneLine, {marginBottom: 10}}>
-                    <Text style={this.style.Text}>Settings</Text>
+                    <Text style={this.style.TextMoreLine}>Settings</Text>
                 </View>
                 <View style={this.style.oneLine}>
                     <Text style={this.style.Text}>PC-IP</Text>
@@ -28,15 +29,12 @@ export default class Settings extends Component {
                     />
                 </View>
                 <View>
-                    <View style={this.style.oneLine}>
-                        <Text style={this.style.TextMoreLine}>About Me</Text>
+                    <View style={this.style.oneLine, {marginTop: 10}}>
+                        <Text style={this.style.TextMoreLine}>About</Text>
                     </View>
                     <View style={this.style.oneLine}>
                         <Text style={this.style.Text}>Version</Text>
-                        <Text style={this.style.Text}>1.0.0</Text>
-                    </View>
-                    <View style={this.style.oneLine}>
-                        <Text style={this.style.TextMoreLine}>This App was made by One Men with a Idea</Text>
+                        <Text style={this.style.Text}>{VersionNumber.appVersion}</Text>
                     </View>
                 </View>
             </View>
@@ -65,6 +63,8 @@ export default class Settings extends Component {
             justifyContent: "center",
             marginTop: 10,
             marginBottom: 10,
+            paddingLeft: 10,
+            paddingRight: 10,
             width: "100%"
         },
         oneLine: {
