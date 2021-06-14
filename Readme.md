@@ -23,6 +23,9 @@ The App is work in Progess. it will be upload on Play Store.
 
 - [X] Change App Name to ConnectivityPC from connectiveTesting10
 
+- [ ] Change About me
+- [ ] Add Impressum/Contact information
+
 (- [ ] Good Designing comming at the End)
 
 Android
