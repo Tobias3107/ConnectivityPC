@@ -13,7 +13,7 @@ export default class StorageCollection extends Component {
             <View>
                 {
                     this.props.state.fsDisks.map((disk, index) => 
-                    <StorageAnzeige fsDisk={disk} key={index}/>)
+                    <StorageAnzeige width={this.props.width} fsDisk={disk} key={index}/>)
                 }
             </View>
         )

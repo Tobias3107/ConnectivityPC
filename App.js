@@ -89,13 +89,25 @@ export default class App extends Component {
   }
 
   render() {
+    var {width, height} = this.state.window;
+    var splitWidth = width;
+    var splitHeigth = height * 0.48;
+    var dimensions = "column";
+    if(width > height) {
+      dimensions = "row";
+      splitWidth = width * 0.50;
+      splitHeigth = height;
+    }
+
     return (
       <>
       {this.state.loadedData ? (
-        <View style={this.styles.container}>
-          <TachoCollection style={this.styles.TachoColl} pcIp={this.state.pcIp} state={this.state}/>
-          <MemAnzeige style={this.styles.MemColl} pcIp={this.state.pcIp} apiAll={this.state.apiAll}/>
-          <StorageCollection style={this.styles.StorColl} pcIp={this.state.pcIp} state={this.state}/>
+        <View style={this.styles.container, {flexDirection: dimensions}}>
+          <TachoCollection width={splitWidth} height={splitHeigth} pcIp={this.state.pcIp} state={this.state}/>
+          <View style={{width: splitWidth, height: splitHeigth}}>
+            <MemAnzeige width={splitWidth} pcIp={this.state.pcIp} apiAll={this.state.apiAll}/>
+            <StorageCollection width={splitWidth} pcIp={this.state.pcIp} state={this.state}/>
+          </View>
         </View>
       ) : 
           (

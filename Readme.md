@@ -40,6 +40,7 @@ IOS
 ## KNOWN ISSUES
 
 - Sometimes dont work rounded of Used GiB 
+- Doesnt Show The Numbers under Storage and Memory Usage
 
 ## LISTEN
 

@@ -9,8 +9,8 @@ export default class TachoCollection extends Component {
         Collection: {
             flex: 1,
             flexDirection: "row",
-            justifyContent: "space-between",
-            padding: 20,
+            justifyContent: "space-around",
+            padding: 5,
             flexWrap: "wrap",
         },
         Tacho: {
@@ -62,7 +62,7 @@ export default class TachoCollection extends Component {
 
     render() {
         return (
-            <ScrollView style={{ height: "50%" }}>
+            <ScrollView style={{height: this.props.height, width: this.props.width}}>
                 <View style={this.styles.Collection}>
                     {
                         this.state.Tachos.map((Tacho, index) => 
